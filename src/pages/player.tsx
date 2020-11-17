@@ -5,6 +5,8 @@ import useSWR from "swr";
 import { Layout } from "../components/Layout";
 import React from "react";
 import { SpotifyState, SpotifyUser } from "../types/spotify";
+import "bootstrap/dist/css/bootstrap.css";
+import { PlayCircle, PauseCircle } from "react-feather";
 
 interface Props {
   user: SpotifyUser;
@@ -18,7 +20,7 @@ const play = (accessToken: string, deviceId: string) => {
       Authorization: `Bearer ${accessToken}`,
     },
     body: JSON.stringify({
-      uris: ["spotify:track:1lCRw5FEZ1gPDNPzy1K4zW"],
+      uris: ["spotify:track:5axup3QHvCTZiqoh51Bg3d"],
     }),
   });
 };
@@ -62,18 +64,18 @@ const Player: NextPage<Props> = ({ accessToken }) => {
       <h1>Player</h1>
       <p>Welcome {user && user.display_name}</p>
       <p>{currentTrack}</p>
-      <button
+      <span
+        id="playerbutton"
         onClick={() => {
           paused ? play(accessToken, deviceId) : pause(accessToken, deviceId);
         }}
       >
-        {paused ? "play" : "pause"}
-      </button>
+        {paused ? <PlayCircle /> : <PauseCircle />}
+      </span>
     </Layout>
   );
 };
 export default Player;
-
 export const getServerSideProps = async (context: GetServerSidePropsContext): Promise<unknown> => {
   const cookies = new Cookies(context.req, context.res);
   const accessToken = cookies.get("spot-next");
