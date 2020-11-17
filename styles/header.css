@@ -1,0 +1,112 @@
+.header{
+  background: rgb(0, 0, 0);
+    width: 280px;
+    height: 100%;
+    margin-top: 15px;
+    position: fixed;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    color: rgb(168, 164, 164);
+    cursor: pointer;
+    border-top:1px solid rgb(3, 3, 3) ;
+}
+.liens {
+margin: 15px;
+}
+.lie {
+  margin: 15px;
+  }
+.link {
+  margin: 15px;
+}
+.logo {
+  width: 80%;
+  margin-top: 0px;
+}
+
+.player {
+  background: rgb(0, 0, 0);
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  width: 1420px;
+  height: 185px;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    margin-top: 455px;
+  color: white;
+  cursor: pointer;
+  border-top:1px solid rgb(3, 3, 3) ;
+
+}
+  
+  
+
+/* .musicControls{
+  background: rgb(0, 0, 0);
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  width: 1450px;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  border-top:1px solid rgb(3, 3, 3) ;
+  
+} */
+
+      
+ .musicControls:hover {
+        color:gold;
+      }
+    
+  
+.musicControls {
+    color: rgb(255, 255, 255);
+}
+.NavBar {
+  background: rgb(0, 0, 0);
+  flex-direction: row;
+  justify-content: center;
+  text-align: right;
+  width: 1420px;
+  height: 50px;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  margin-bottom: -25px;
+  flex-direction: row;
+  justify-content: center;
+
+  text-align: right;
+  color: white;
+  cursor: pointer;
+  border-top:1px solid rgb(3, 3, 3) ;
+
+}
+
+.parcourir {
+  background: rgb(0, 0, 0);
+  flex-direction: row;
+  justify-content: center;
+  width: 1420px;
+  height: 50px;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: left;
+  color: white;
+  cursor: pointer;
+  border-top:1px solid rgb(3, 3, 3) ;
+}
+
+
+
+
