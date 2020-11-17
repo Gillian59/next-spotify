@@ -61,17 +61,20 @@ const Player: NextPage<Props> = ({ accessToken }) => {
 
   return (
     <Layout isLoggedIn={true}>
-      <h1>Player</h1>
-      <p>Welcome {user && user.display_name}</p>
-      <p>{currentTrack}</p>
-      <button
-        onClick={() => {
-          paused ? play(accessToken, deviceId) : pause(accessToken, deviceId);
-        }}
-      >
-        {paused ? "play" : "pause"}
-      </button>
-
+      
+      <div className="player">
+        <h1>Player</h1>
+        <p>Welcome {user && user.display_name}</p>
+        <p>{currentTrack}</p>
+        <button
+          onClick={() => {
+            paused ? play(accessToken, deviceId) : pause(accessToken, deviceId);
+          }}
+        >
+          {paused ? "play" : "pause"}
+        </button>
+      </div>
+        
       <h3>Going to Drum And Bass</h3>
       <PlaylistsCollection playlistStyle={"dnb"} />
 
