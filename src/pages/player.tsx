@@ -3,6 +3,8 @@ import useSpotifyPlayer from "../hooks/useSpotifyPlayer";
 import Cookies from "cookies";
 import useSWR from "swr";
 import { Layout } from "../components/Layout";
+import PlaylistsCollection from "../components/playlists";
+
 import React from "react";
 import { SpotifyState, SpotifyUser } from "../types/spotify";
 
@@ -69,6 +71,7 @@ const Player: NextPage<Props> = ({ accessToken }) => {
       >
         {paused ? "play" : "pause"}
       </button>
+      <PlaylistsCollection />
     </Layout>
   );
 };
