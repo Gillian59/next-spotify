@@ -3,30 +3,35 @@ import useSWR from "swr";
 import { SpotifyPlaylists } from "../types/spotify";
 import styles from "../styles/Playlists.module.css";
 import Link from "next/link";
+import { Card } from "react-bootstrap";
 
-const PlaylistsCollection: React.FC = () => {
-  const { data, error } = useSWR("/api/get-playlists");
+type PlaylistStyle = {
+  playlistStyle: string;
+};
+
+const PlaylistsCollection: React.FC<PlaylistStyle> = ({ playlistStyle }) => {
+  const { data, error } = useSWR("/api/get-playlists?style=" + playlistStyle);
 
   if (error) return <div>failed to load playlist</div>;
   if (!data) return <div>loading playlist...</div>;
 
   const playlists: SpotifyPlaylists = data.playlists;
   return (
-    <div className="row">
-      {playlists.items.map((playlist, id) => {
+    <div className="row mt-3 mb-3">
+      {playlists.items.map((playlist) => {
         return (
-          <Link key={id} href="#" passHref>
-            <div className={styles.card + " col-12 col-md-3 col-lg-2 mx-2 mt-3"} title={playlist.name}>
-              <div className="">
-                <div className="card-body">
-                  <img
-                    className={styles.card_img_top + " card-img-top mt-2"}
-                    src={playlist.images[0].url}
-                    alt="Card image cap"
-                  />
-                </div>
-              </div>
-            </div>
+          <Link key={playlist.id} href="#" passHref>
+            <Card className={styles.card + " col-12 col-md-3 col-lg-2 mx-2 mt-3"} title={playlist.name}>
+              <Card.Img className={styles.card_img + " img-fluid"} src={playlist.images[0].url} alt="Card image cap" />
+              <Card.Body>
+                <Card.Title className="title text-truncate" style={{ fontSize: "medium" }}>
+                  {playlist.name}
+                </Card.Title>
+                <Card.Text className="text-truncate" style={{ fontSize: "small" }}>
+                  {playlist.description}
+                </Card.Text>
+              </Card.Body>
+            </Card>
           </Link>
         );
       })}

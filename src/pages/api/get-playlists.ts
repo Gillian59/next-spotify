@@ -6,7 +6,10 @@ export default async (request: NextApiRequest, response: NextApiResponse): Promi
   const accessToken = cookies.get("spot-next");
 
   if (accessToken) {
-    const res = await fetch("https://api.spotify.com/v1/search?q=electro&type=playlist", {
+    let style = "random";
+    if (request.query.style) style = String(request.query.style);
+
+    const res = await fetch(`https://api.spotify.com/v1/search?q=${style}&type=playlist&limit=5`, {
       method: "GET",
       headers: {
         "content-type": "application/x-www-form-urlencoded",
