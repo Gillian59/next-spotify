@@ -3,6 +3,8 @@ import useSpotifyPlayer from "../hooks/useSpotifyPlayer";
 import Cookies from "cookies";
 import useSWR from "swr";
 import { Layout } from "../components/Layout";
+import PlaylistsCollection from "../components/playlists";
+
 import React from "react";
 import { SpotifyState, SpotifyUser } from "../types/spotify";
 
@@ -59,6 +61,7 @@ const Player: NextPage<Props> = ({ accessToken }) => {
 
   return (
     <Layout isLoggedIn={true}>
+      
       <div className="player">
         <h1>Player</h1>
         <p>Welcome {user && user.display_name}</p>
@@ -71,6 +74,21 @@ const Player: NextPage<Props> = ({ accessToken }) => {
           {paused ? "play" : "pause"}
         </button>
       </div>
+        
+      <h3>Going to Drum And Bass</h3>
+      <PlaylistsCollection playlistStyle={"dnb"} />
+
+      <h3>Forge some Metal</h3>
+      <PlaylistsCollection playlistStyle={"metal"} />
+
+      <h3>Destroy in Electro</h3>
+      <PlaylistsCollection playlistStyle={"electro"} />
+
+      <h3>Chill out with Reggae</h3>
+      <PlaylistsCollection playlistStyle={"reggae"} />
+
+      <h3>Up to be Happy</h3>
+      <PlaylistsCollection playlistStyle={"happy"} />
     </Layout>
   );
 };
