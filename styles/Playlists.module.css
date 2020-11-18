@@ -1,16 +1,21 @@
 .card {
   /* width: 150px;*/
-  height: 300px;
+  /* height: 300px; */
   color: white;
   cursor: pointer;
-  background-color: rgb(37 36 36);
-  border: 1px solid rgb(0 0 0);
+  background-color: rgb(10 10 10);
+  border: 1px solid rgb(125 113 113);
   padding-top: 5px;
   overflow: hidden;
 }
+
+.card:hover {
+  background-color: rgb(49 48 48 / 85%);
+}
+
 .card img {
   /* width: 100px; */
-  height: 180px;
+  height: 120px;
   object-fit: contain;
 }
 /* .card img {

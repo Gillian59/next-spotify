@@ -1,12 +1,12 @@
 import { NextPage, GetServerSidePropsContext } from "next";
-import useSpotifyPlayer from "../hooks/useSpotifyPlayer";
+import useSpotifyPlayer from "../../hooks/useSpotifyPlayer";
 import Cookies from "cookies";
 import useSWR from "swr";
-import { Layout } from "../components/Layout";
-import PlaylistsCollection from "../components/Playlists";
+import { Layout } from "../../components/Layout";
+import PlaylistsCollection from "../../components/Playlists";
 
 import React from "react";
-import { SpotifyState, SpotifyUser } from "../types/spotify";
+import { SpotifyState, SpotifyUser } from "../../types/spotify";
 
 interface Props {
   user: SpotifyUser;
@@ -61,33 +61,8 @@ const Player: NextPage<Props> = ({ accessToken }) => {
 
   return (
     <Layout isLoggedIn={true}>
-      <div className="player">
-        <h1>Player</h1>
-        <p>Welcome {user && user.display_name}</p>
-        <p>{currentTrack}</p>
-        <button
-          onClick={() => {
-            paused ? play(accessToken, deviceId) : pause(accessToken, deviceId);
-          }}
-        >
-          {paused ? "play" : "pause"}
-        </button>
-      </div>
-
-      <h3>Going to Drum And Bass</h3>
-      <PlaylistsCollection playlistStyle={"dnb"} />
-
-      <h3>Forge some Metal</h3>
-      <PlaylistsCollection playlistStyle={"metal"} />
-
-      <h3>Destroy in Electro</h3>
-      <PlaylistsCollection playlistStyle={"electro"} />
-
-      <h3>Chill out with Reggae</h3>
-      <PlaylistsCollection playlistStyle={"reggae"} />
-
-      <h3>Up to be Happy</h3>
-      <PlaylistsCollection playlistStyle={"happy"} />
+      {" "}
+      <p>{user && user.display_name}</p>
     </Layout>
   );
 };
