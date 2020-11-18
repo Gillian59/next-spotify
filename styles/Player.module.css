@@ -11,15 +11,15 @@
   /* position: fixed;
   text-align: start; */
 }
-.player:after {
-  content: ""; /* This is necessary for the pseudo element to work. */
-  display: block; /* This will put the pseudo element on its own line. */
+/* .player:before {
+  content: "";
+  display: block;
   margin-left: 249px;
-  width: 100%; /* Change this to whatever width you want. */
+  width: 100%;
   padding-top: 79px;
   border-top: 2px solid rgb(80 3 3);
   position: absolute;
-}
+} */
 .player i {
   font-size: 1.5em;
   color: rgb(84 148 191 / 40%);
@@ -30,4 +30,7 @@
 }
 .informations {
   min-width: 500px;
+}
+.informations span {
+  color: rgb(204 199 199) !important;
 }

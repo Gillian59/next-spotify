@@ -3,9 +3,13 @@ import Head from "next/head";
 import Link from "next/link";
 import Sidebar from "./sidebar";
 import Player from "./player";
+import useSWR from "swr";
 import styles from "../../styles/Layout.module.css";
 
 export const Layout: React.FC<Props> = ({ children, isLoggedIn, spotifyLoginUrl }) => {
+  const { data, error } = useSWR("/api/get-cookies");
+  console.log("print Layout data : ", error);
+  const accessToken = data;
   return (
     <>
       <Head>
@@ -17,7 +21,7 @@ export const Layout: React.FC<Props> = ({ children, isLoggedIn, spotifyLoginUrl 
         <Sidebar isLoggedIn={isLoggedIn} spotifyLoginUrl={spotifyLoginUrl} />
 
         <main className={" " + styles.main}>{children}</main>
-        <Player isLoggedIn={isLoggedIn} spotifyLoginUrl={spotifyLoginUrl} />
+        <Player accessToken={accessToken} isLoggedIn={isLoggedIn} />
       </div>
     </>
   );

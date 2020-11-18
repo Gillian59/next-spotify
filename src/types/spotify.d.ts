@@ -27,6 +27,37 @@ type SpotifyTrack = {
     }[];
   };
 };
+
+type spotifyArtist = {
+  external_urls: {
+    spotify: string;
+  };
+  href: string;
+  id: string;
+  name: string;
+  type: string;
+  uri: string;
+}[];
+
+export type SpotifyAlbum = {
+  artists: spotifyArtist;
+  available_markets: string[];
+  disc_number: number;
+  duration_ms: number;
+  explicit: boolean;
+  external_urls: {
+    spotify: string;
+  };
+  href: string;
+  id: string;
+  is_local: boolean;
+  name: string;
+  preview_url: string;
+  track_number: number;
+  type: string;
+  uri: string;
+};
+
 export type SpotifyState = {
   context: {
     uri: string | null;
@@ -69,7 +100,7 @@ export type SpotifyUser = {
   uri?: string;
 };
 
-type SpotifyPlaylist = {
+export type SpotifyPlaylist = {
   collaborative: boolean;
   description: string;
   external_urls: { spotify: string };
@@ -100,9 +131,19 @@ type SpotifyPlaylist = {
   uri: string;
 };
 
-export type SpotifyPlaylists = {
+// export type SpotifyPlaylists = {
+//   href: string;
+//   items: SpotifyPlaylist[];
+//   limit: number;
+//   next: string;
+//   offset: 0;
+//   previous: string;
+//   total: number;
+// };
+
+export type SpotifySearch = {
   href: string;
-  items: SpotifyPlaylist[];
+  items: SpotifyPlaylist[] | SpotifyTrack[];
   limit: number;
   next: string;
   offset: 0;

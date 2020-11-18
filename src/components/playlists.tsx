@@ -1,6 +1,6 @@
 import React from "react";
 import useSWR from "swr";
-import { SpotifyPlaylists } from "../types/spotify";
+import { SpotifyPlaylist } from "../types/spotify";
 import styles from "../../styles/Playlists.module.css";
 import Link from "next/link";
 import { Card } from "react-bootstrap";
@@ -15,10 +15,10 @@ const PlaylistsCollection: React.FC<PlaylistStyle> = ({ playlistStyle }) => {
   if (error) return <div>failed to load playlist</div>;
   if (!data) return <div>loading playlist...</div>;
 
-  const playlists: SpotifyPlaylists = data.playlists;
+  const playlists: SpotifyPlaylist[] = data.playlists.items;
   return (
     <div className="row mt-3 collection">
-      {playlists.items.map((playlist) => {
+      {playlists.map((playlist) => {
         return (
           <Link key={playlist.id} href={`/playlist/${playlist.id}`} passHref>
             <Card className={styles.card + " col-12 col-md-3 col-lg-2 mx-2 mt-3"} title={playlist.name}>

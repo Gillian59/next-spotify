@@ -61,7 +61,7 @@ const Player: NextPage<Props> = ({ accessToken }) => {
 
   return (
     <Layout isLoggedIn={true}>
-      <div className="player">
+      {/* <div className="player">
         <h1>Player</h1>
         <p>Welcome {user && user.display_name}</p>
         <p>{currentTrack}</p>
@@ -72,7 +72,7 @@ const Player: NextPage<Props> = ({ accessToken }) => {
         >
           {paused ? "play" : "pause"}
         </button>
-      </div>
+      </div> */}
 
       <h3>Going to Drum And Bass</h3>
       <PlaylistsCollection playlistStyle={"dnb"} />
