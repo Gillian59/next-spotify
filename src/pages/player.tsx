@@ -5,6 +5,7 @@ import useSWR from "swr";
 import { Layout } from "../components/Layout";
 import React from "react";
 import { SpotifyState, SpotifyUser } from "../types/spotify";
+import Link from "next/link";
 
 interface Props {
   user: SpotifyUser;
@@ -37,7 +38,7 @@ const Player: NextPage<Props> = ({ accessToken }) => {
   const [paused, setPaused] = React.useState(false);
   const [currentTrack, setCurrentTrack] = React.useState("");
   const [deviceId, player] = useSpotifyPlayer(accessToken);
-
+  console.log(accessToken);
   React.useEffect(() => {
     const playerStateChanged = (state: SpotifyState) => {
       setPaused(state.paused);
@@ -62,6 +63,8 @@ const Player: NextPage<Props> = ({ accessToken }) => {
       <h1>Player</h1>
       <p>Welcome {user && user.display_name}</p>
       <p>{currentTrack}</p>
+      <Link href="/categories/"> xx</Link>
+      <Link href="/recherche/"> yy</Link>
       <button
         onClick={() => {
           paused ? play(accessToken, deviceId) : pause(accessToken, deviceId);
