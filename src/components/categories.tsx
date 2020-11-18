@@ -6,27 +6,32 @@ const CategoryList: React.FC<{ accessToken: string }> = ({ accessToken }) => {
   //  console.log({ categories_items });
   const [categories, setCategories] = React.useState<CategoriesItem[]>([]);
   const [loaded, setLoaded] = React.useState(false);
+  const [req, setReq] = React.useState("https://api.spotify.com/v1/browse/categories");
+
   const getCategories = async () => {
-    let req = "https://api.spotify.com/v1/browse/categories";
+    //    let req = "https://api.spotify.com/v1/browse/categories";
     console.log(req);
     const arrayCategories: CategoriesItem[] = [];
-    while (req !== null) {
-      console.log(req);
-      const response = await fetch(req, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-      const data = await response.json();
-      data.categories.items.forEach((item: any) => {
-        arrayCategories.push(item);
-        setCategories(arrayCategories);
-      });
-      req = data.categories.next;
+    //    while (req !== null) {
+    console.log(req);
+    const response = await fetch(req, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    const data = await response.json();
+    data.categories.items.forEach((item: any) => {
+      arrayCategories.push(item);
+      setCategories(arrayCategories);
+    });
+    setReq(data.categories.next);
+    //    }
+    if (req === null) {
+      setLoaded(true);
     }
-    setLoaded(true);
   };
+
   React.useEffect(() => {
     getCategories();
   }, [loaded]);
