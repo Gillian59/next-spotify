@@ -7,7 +7,6 @@ import PlaylistsCollection from "../components/Playlists";
 
 import React from "react";
 import { SpotifyState, SpotifyUser } from "../types/spotify";
-import Link from "next/link";
 
 interface Props {
   user: SpotifyUser;
@@ -40,7 +39,7 @@ const Player: NextPage<Props> = ({ accessToken }) => {
   const [paused, setPaused] = React.useState(false);
   const [currentTrack, setCurrentTrack] = React.useState("");
   const [deviceId, player] = useSpotifyPlayer(accessToken);
-  console.log(accessToken);
+
   React.useEffect(() => {
     const playerStateChanged = (state: SpotifyState) => {
       setPaused(state.paused);

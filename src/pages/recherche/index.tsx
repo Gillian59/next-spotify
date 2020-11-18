@@ -5,7 +5,7 @@ import Cookies from "cookies";
 
 const getRecherche: React.FC<{ data: any }> = ({ data }) => {
   console.log("ici");
-  console.log(data);
+  console.log(data.tracks.items);
 
   return (
     <div>
@@ -19,23 +19,21 @@ const getRecherche: React.FC<{ data: any }> = ({ data }) => {
           </div>
         );
       })}
-      <p>track</p>
+      <p>Titres</p>
       {data.tracks.items.map((elt: any) => {
         return (
           <div key={elt.name}>
             {elt.album.images.length > 0 ? <img src={elt.album.images[0].url} alt={elt.name}></img> : null}
             <p> {elt.name}</p>
-            <p>{elt.type}</p>
           </div>
         );
       })}
-      <p>album</p>
+      <p>Albums</p>
       {data.albums.items.map((elt: any) => {
         return (
           <div key={elt.name}>
             {elt.images.length > 0 ? <img src={elt.images[0].url} alt={elt.name}></img> : null}
             <p> {elt.name}</p>
-            <p>{elt.type}</p>
           </div>
         );
       })}
@@ -51,6 +49,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   //  const dataG: any = [];
   if (accessToken) {
     const req = "https://api.spotify.com/v1/search?q=bruel&type=track%2Cartist%2Calbum&sort_by=popularity.desc";
+    //    const req = "https://api.spotify.com/v1/search?q=bruel&type=track&sort_by=popularity.desc";
 
     //    console.log(req);
     //    while (req !== null) {
