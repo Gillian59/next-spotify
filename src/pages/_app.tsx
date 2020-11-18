@@ -1,7 +1,7 @@
 import type { AppProps } from "next/app";
 import { SWRConfig } from "swr";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../../styles/header.css";
+// import "../../styles/header.css";
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (

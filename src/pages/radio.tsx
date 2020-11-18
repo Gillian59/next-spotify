@@ -2,8 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-const Parcourir = () => {
+const Parcourir: React.FC = () => {
   const router = useRouter();
   return (
     <div className="parcourir">
