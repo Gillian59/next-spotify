@@ -5,34 +5,37 @@ const CategoryList: React.FC<{ accessToken: string }> = ({ accessToken }) => {
   console.log("ici");
   //  console.log({ categories_items });
   const [categories, setCategories] = React.useState<CategoriesItem[]>([]);
-  React.useEffect(() => {
-    const getCategories = async () => {
-      let req = "https://api.spotify.com/v1/browse/categories";
+  const [loaded, setLoaded] = React.useState(false);
+  const getCategories = async () => {
+    let req = "https://api.spotify.com/v1/browse/categories";
+    console.log(req);
+    const arrayCategories: CategoriesItem[] = [];
+    while (req !== null) {
       console.log(req);
-      while (req !== null) {
-        console.log(req);
-        const response = await fetch(req, {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
-        const data = await response.json();
-        req = data.categories.next;
-        data.categories.items.forEach((item: any) => {
-          setCategories([...categories, item]);
-        });
-        console.log("avant");
-        console.log(categories);
-      }
-    };
+      const response = await fetch(req, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      const data = await response.json();
+      data.categories.items.forEach((item: any) => {
+        arrayCategories.push(item);
+        setCategories(arrayCategories);
+      });
+      req = data.categories.next;
+    }
+    setLoaded(true);
+  };
+  React.useEffect(() => {
     getCategories();
-  }, [categories]);
+  }, [loaded]);
   return (
     <div>
-      {categories.map((elt) => {
+      {/* {setLoaded(false)} */}
+      {categories.map((elt, id) => {
         return (
-          <div key={elt.name}>
+          <div key={elt.id + "_" + id}>
             <Link href={`/categories/${elt.id}`}>
               <div>
                 <p> {elt.name}</p>
