@@ -1,0 +1,22 @@
+.layout {
+  overflow: hidden;
+}
+
+.layout main {
+  /* min-width: 100%; */
+  min-height: 100%;
+  margin-left: 250px;
+  padding: 50px 50px 100px 50px;
+  background-image: url("../public/main_background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+}
+.layout h3 {
+  color: rgb(181 177 177);
+  margin-top: 2em;
+}
+.main {
+  align-content: center;
+}

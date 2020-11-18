@@ -68,3 +68,44 @@ export type SpotifyUser = {
   type?: string;
   uri?: string;
 };
+
+type SpotifyPlaylist = {
+  collaborative: boolean;
+  description: string;
+  external_urls: { spotify: string };
+  href: string;
+  id: string;
+  images: {
+    url: string;
+    height: number;
+    width: number;
+  }[];
+  name: string;
+  owner: {
+    display_name: string;
+    external_urls: { spotify: string };
+    href: string;
+    id: string;
+    type: string;
+    uri: string;
+  };
+  primary_color: string;
+  public: string;
+  snapshot_id: string;
+  tracks: {
+    href: string;
+    total: 50;
+  };
+  type: string;
+  uri: string;
+};
+
+export type SpotifyPlaylists = {
+  href: string;
+  items: SpotifyPlaylist[];
+  limit: number;
+  next: string;
+  offset: 0;
+  previous: string;
+  total: number;
+};

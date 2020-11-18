@@ -1,31 +1,9 @@
 import React from "react";
 import Head from "next/head";
-
-type Props = {
-  isLoggedIn: boolean;
-  spotifyLoginUrl?: string;
-};
-
-const NavBar: React.FC<Props> = ({ isLoggedIn, spotifyLoginUrl }) => {
-  return (
-    <nav>
-      <p>
-        <a href="/">home</a>
-      </p>
-      {isLoggedIn ? (
-        <>
-          <p>
-            <a href="/api/logout">logout</a>
-          </p>
-        </>
-      ) : (
-        <p>
-          <a href={spotifyLoginUrl}>login</a>
-        </p>
-      )}
-    </nav>
-  );
-};
+import Link from "next/link";
+import Sidebar from "./sidebar";
+import Player from "./player";
+import styles from "../../styles/Layout.module.css";
 
 export const Layout: React.FC<Props> = ({ children, isLoggedIn, spotifyLoginUrl }) => {
   return (
@@ -33,9 +11,14 @@ export const Layout: React.FC<Props> = ({ children, isLoggedIn, spotifyLoginUrl 
       <Head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <script src="https://kit.fontawesome.com/95a069202e.js" crossOrigin="anonymous"></script>
       </Head>
-      <NavBar isLoggedIn={isLoggedIn} spotifyLoginUrl={spotifyLoginUrl} />
-      <main>{children}</main>
+      <div className={"flex-row justify-content-start " + styles.layout}>
+        <Sidebar isLoggedIn={isLoggedIn} spotifyLoginUrl={spotifyLoginUrl} />
+
+        <main className={" " + styles.main}>{children}</main>
+        <Player isLoggedIn={isLoggedIn} spotifyLoginUrl={spotifyLoginUrl} />
+      </div>
     </>
   );
 };

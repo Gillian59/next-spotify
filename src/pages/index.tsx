@@ -12,7 +12,7 @@ const Index: React.FC<IndexProps> = ({ spotifyLoginUrl }) => {
   const user = data;
 
   return (
-    <Layout isLoggedIn={user !== undefined} spotifyLoginUrl={spotifyLoginUrl}>
+    <Layout isLoggedIn={user !== undefined} spotifyLoginUrl={String(spotifyLoginUrl)}>
       <h1>Home page</h1>
       <p>{user && user.display_name}</p>
     </Layout>
