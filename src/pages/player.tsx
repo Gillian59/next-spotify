@@ -3,16 +3,14 @@ import useSpotifyPlayer from "../hooks/useSpotifyPlayer";
 import Cookies from "cookies";
 import useSWR from "swr";
 import { Layout } from "../components/Layout";
-import PlaylistsCollection from "../components/Playlists";
-
-import React from "react";
+import PlaylistsCollection from "../components/playlists";
+import CategoryList from "../components/categories";
+import React, { useState } from "react";
 import { SpotifyState, SpotifyUser } from "../types/spotify";
-
 interface Props {
   user: SpotifyUser;
   accessToken: string;
 }
-
 const play = (accessToken: string, deviceId: string) => {
   return fetch(`https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`, {
     method: "PUT",
@@ -24,7 +22,6 @@ const play = (accessToken: string, deviceId: string) => {
     }),
   });
 };
-
 const pause = (accessToken: string, deviceId: string) => {
   return fetch(`https://api.spotify.com/v1/me/player/pause?device_id=${deviceId}`, {
     method: "PUT",
@@ -33,12 +30,12 @@ const pause = (accessToken: string, deviceId: string) => {
     },
   });
 };
-
 const Player: NextPage<Props> = ({ accessToken }) => {
   const { data, error } = useSWR("/api/get-user-info");
   const [paused, setPaused] = React.useState(false);
   const [currentTrack, setCurrentTrack] = React.useState("");
   const [deviceId, player] = useSpotifyPlayer(accessToken);
+  const [page, setPage] = useState("search");
 
   React.useEffect(() => {
     const playerStateChanged = (state: SpotifyState) => {
@@ -54,11 +51,9 @@ const Player: NextPage<Props> = ({ accessToken }) => {
       }
     };
   }, [player]);
-
   if (error) return <div>failed to load</div>;
   if (!data) return <div>loading...</div>;
   const user = data;
-
   return (
     <Layout isLoggedIn={true}>
       <div className="player">
@@ -73,26 +68,20 @@ const Player: NextPage<Props> = ({ accessToken }) => {
           {paused ? "play" : "pause"}
         </button>
       </div>
-
-      <h3>Going to Drum And Bass</h3>
-      <PlaylistsCollection playlistStyle={"dnb"} />
-
-      <h3>Forge some Metal</h3>
-      <PlaylistsCollection playlistStyle={"metal"} />
-
-      <h3>Destroy in Electro</h3>
-      <PlaylistsCollection playlistStyle={"electro"} />
-
-      <h3>Chill out with Reggae</h3>
-      <PlaylistsCollection playlistStyle={"reggae"} />
-
-      <h3>Up to be Happy</h3>
+      <div>
+        {/* {page === "home" && <Home />} */}
+        {page === "search" && <CategoryList accessToken={accessToken} />}
+      </div>
+      ​<h3>Going to Drum And Bass</h3>
+      <PlaylistsCollection playlistStyle={"dnb"} />​<h3>Forge some Metal</h3>
+      <PlaylistsCollection playlistStyle={"metal"} />​<h3>Destroy in Electro</h3>
+      <PlaylistsCollection playlistStyle={"electro"} />​<h3>Chill out with Reggae</h3>
+      <PlaylistsCollection playlistStyle={"reggae"} />​<h3>Up to be Happy</h3>
       <PlaylistsCollection playlistStyle={"happy"} />
     </Layout>
   );
 };
 export default Player;
-
 export const getServerSideProps = async (context: GetServerSidePropsContext): Promise<unknown> => {
   const cookies = new Cookies(context.req, context.res);
   const accessToken = cookies.get("spot-next");

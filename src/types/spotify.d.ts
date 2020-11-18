@@ -1,6 +1,15 @@
 // Keep in mind that this has been make from studying a console.log output
 // Don't put too much faith in it
-
+export type CategoriesItem = {
+  href: string;
+  icons: {
+    height: number;
+    url: string;
+    width: number;
+  }[];
+  id: string;
+  name: string;
+};
 type SpotifyTrack = {
   id: string;
   uri: string;
@@ -53,7 +62,6 @@ export type SpotifyState = {
     skipping_prev: boolean;
   };
 };
-
 export type SpotifyUser = {
   accessToken: string;
   display_name: string;
@@ -68,7 +76,6 @@ export type SpotifyUser = {
   type?: string;
   uri?: string;
 };
-
 type SpotifyPlaylist = {
   collaborative: boolean;
   description: string;
@@ -99,7 +106,6 @@ type SpotifyPlaylist = {
   type: string;
   uri: string;
 };
-
 export type SpotifyPlaylists = {
   href: string;
   items: SpotifyPlaylist[];
