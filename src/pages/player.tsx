@@ -4,9 +4,11 @@ import Cookies from "cookies";
 import useSWR from "swr";
 import { Layout } from "../components/Layout";
 import PlaylistsCollection from "../components/playlists";
-import CategoryList from "../components/categories";
+//import CategoryList from "../components/categories";
 import React, { useState } from "react";
 import { SpotifyState, SpotifyUser } from "../types/spotify";
+import FormSearch from "../components/search";
+
 interface Props {
   user: SpotifyUser;
   accessToken: string;
@@ -70,7 +72,7 @@ const Player: NextPage<Props> = ({ accessToken }) => {
       </div>
       <div>
         {/* {page === "home" && <Home />} */}
-        {page === "search" && <CategoryList accessToken={accessToken} />}
+        {page === "search" && <FormSearch accessToken={accessToken} />}
       </div>
       ​<h3>Going to Drum And Bass</h3>
       <PlaylistsCollection playlistStyle={"dnb"} />​<h3>Forge some Metal</h3>
