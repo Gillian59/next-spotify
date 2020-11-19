@@ -6,16 +6,13 @@ import styles from "../../styles/Categories.module.css";
 
 const CategoryList: React.FC<{ accessToken: string }> = ({ accessToken }) => {
   console.log("ici");
-  //  console.log({ categories_items });
   const [categories, setCategories] = React.useState<CategoriesItem[]>([]);
   const [loaded, setLoaded] = React.useState(false);
   const [req, setReq] = React.useState("https://api.spotify.com/v1/browse/categories");
 
   const getCategories = async () => {
-    //    let req = "https://api.spotify.com/v1/browse/categories";
     console.log(req);
     const arrayCategories: CategoriesItem[] = [];
-    //    while (req !== null) {
     console.log(req);
     const response = await fetch(req, {
       method: "GET",
@@ -40,7 +37,6 @@ const CategoryList: React.FC<{ accessToken: string }> = ({ accessToken }) => {
   }, [loaded]);
   return (
     <div className="row mt-3 collection">
-      {/* {setLoaded(false)} */}
       {categories.map((elt, id) => {
         return (
           <Link key={elt.id + "_" + id} href={`/categories/${elt.id}`}>
