@@ -7,12 +7,14 @@ type searchData = {
   albums: album;
 };
 
-const ShowResultat: React.FC<any> = ({ accessToken }) => {
+const ShowResultat: React.FC<any> = ({ accessToken, texteToFind }) => {
   const [data, setData] = React.useState<searchData | null>(null);
 
-  const req = "https://api.spotify.com/v1/search?q=bruel&type=track%2Cartist%2Calbum&sort_by=popularity.desc";
+  //  const req = "https://api.spotify.com/v1/search?q=bruel&type=track%2Cartist%2Calbum&sort_by=popularity.desc";
+  const req = `https://api.spotify.com/v1/search?q=${texteToFind}&type=track%2Cartist%2Calbum&sort_by=popularity.desc`;
 
   React.useEffect(() => {
+    console.log({ texteToFind });
     const getResultat = async () => {
       const response = await fetch(req, {
         method: "GET",
