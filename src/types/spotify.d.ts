@@ -1,6 +1,19 @@
 // Keep in mind that this has been make from studying a console.log output
-// Don't put too much faith in it
 
+//import { ExecFileOptionsWithStringEncoding, SpawnSyncOptionsWithStringEncoding } from "child_process";
+//import { type } from "os";
+
+// Don't put too much faith in it
+export type CategoriesItem = {
+  href: string;
+  icons: {
+    height: number;
+    url: string;
+    width: number;
+  }[];
+  id: string;
+  name: string;
+};
 type SpotifyTrack = {
   id: string;
   uri: string;
@@ -53,7 +66,6 @@ export type SpotifyState = {
     skipping_prev: boolean;
   };
 };
-
 export type SpotifyUser = {
   accessToken: string;
   display_name: string;
@@ -68,7 +80,6 @@ export type SpotifyUser = {
   type?: string;
   uri?: string;
 };
-
 type SpotifyPlaylist = {
   collaborative: boolean;
   description: string;
@@ -99,7 +110,6 @@ type SpotifyPlaylist = {
   type: string;
   uri: string;
 };
-
 export type SpotifyPlaylists = {
   href: string;
   items: SpotifyPlaylist[];
@@ -108,4 +118,130 @@ export type SpotifyPlaylists = {
   offset: 0;
   previous: string;
   total: number;
+};
+
+export type artist = {
+  href: string;
+  items: {
+    external_urls: {
+      spotify: string;
+    };
+    followers: {
+      href: string;
+      total: number;
+    };
+    genres: string[];
+    href: string;
+    id: string;
+    images: {
+      height: number;
+      url: string;
+      width: number;
+    }[];
+    name: string;
+    popularity: number;
+    type: string;
+    uri: string;
+  }[];
+};
+
+export type track = {
+  href: string;
+  items: {
+    album: {
+      album_type: string;
+      artists: {
+        external_urls: {
+          spotify: string;
+        };
+        href: string;
+        id: string;
+        name: string;
+        type: string;
+        uri: string;
+      }[];
+      available_markets: string[];
+      external_urls: {
+        spotify: string;
+      };
+      href: string;
+      id: string;
+      images: {
+        height: number;
+        url: string;
+        width: number;
+      }[];
+      name: string;
+      release_date: string;
+      release_date_precision: string;
+      total_tracks: number;
+      type: string;
+      uri: string;
+    };
+
+    artists: {
+      external_urls: {
+        spotify: string;
+      };
+      href: string;
+      id: string;
+      name: string;
+      type: string;
+      uri: string;
+    }[];
+
+    available_markets: string[];
+    disc_number: number;
+    duration_ms: number;
+    explicit: boolean;
+    external_ids: {
+      isrc: string;
+    };
+    external_urls: {
+      spotify: string;
+    };
+    href: string;
+    id: string;
+    is_local: boolean;
+    is_playable: boolean;
+    name: string;
+    popularity: number;
+    preview_url: string;
+    track_number: number;
+    type: string;
+    uri: string;
+  }[];
+};
+export type album = {
+  href: string;
+  items: {
+    album_type: string;
+    artists: {
+      external_urls: {
+        spotify: string;
+      };
+      href: string;
+      id: string;
+      name: string;
+      type: string;
+      uri: string;
+    }[];
+    available_markets: string[];
+    external_urls: {
+      spotify: string;
+    };
+    href: string;
+    id: string;
+    images: {
+      height: number;
+      url: string;
+      width: numbert;
+    }[];
+    name: string;
+    release_date: string;
+    release_date_precision: string;
+    total_tracks: number;
+    type: string;
+    uri: string;
+  }[];
 };
