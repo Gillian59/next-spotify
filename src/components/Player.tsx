@@ -19,22 +19,27 @@ const play = (accessToken: string, deviceId: string) => {
       Authorization: `Bearer ${accessToken}`,
     },
     body: JSON.stringify({
-      uris: ["spotify:album:2W2nqEKXWBorbq5yvm3jZg:tracks"],
+      context_uri: "spotify:playlist:37i9dQZF1DX8pxtTvJ2V4V",
+      // uris: ["spotify:track:4Ynr1SPCeUI0W0YPeSFSIK"],
+    }),
+  });
+};
+
+const resume = (accessToken: string, deviceId: string, track_id: string, position: number) => {
+  return fetch(`https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify({
+      uris: ["spotify:track:" + track_id],
+      position_ms: position,
     }),
   });
 };
 
 const pause = (accessToken: string, deviceId: string) => {
   return fetch(`https://api.spotify.com/v1/me/player/pause?device_id=${deviceId}`, {
-    method: "PUT",
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
-};
-
-const resume = (accessToken: string, deviceId: string) => {
-  return fetch(`https://api.spotify.com/v1/me/player/?device_id=${deviceId}`, {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${accessToken}`,
@@ -61,15 +66,39 @@ const next = (accessToken: string, deviceId: string) => {
   });
 };
 
+const seek = (accessToken: string, deviceId: string, position_ms: number) => {
+  return fetch(`https://api.spotify.com/v1/me/player/seek?device_id=${deviceId}&position_ms=${position_ms}`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+};
+
+const convertMilliToMinSec = (ms: number) => {
+  const min = Math.floor(ms / 60000);
+  const sec = parseInt(((ms % 60000) / 1000).toFixed(0));
+  return `${min}:${sec < 10 ? "0" : ""}${sec}`;
+};
+
 const Player: React.FC<Props> = ({ accessToken, isLoggedIn }) => {
   const [paused, setPaused] = React.useState(false);
+  const [currentTrackID, setCurrentTrackID] = React.useState("");
   const [currentTrack, setCurrentTrack] = React.useState("");
+  const [currentTrackCover, setCurrentTrackCover] = React.useState("");
+  const [currentTrackPosition, setCurrentTrackPosition] = React.useState(0);
+  const [currentTrackDuration, setCurrentTrackDuration] = React.useState(0);
   const [deviceId, player] = useSpotifyPlayer(accessToken);
 
   React.useEffect(() => {
     const playerStateChanged = (state: SpotifyState) => {
       setPaused(state.paused);
+      setCurrentTrackID(state.track_window.current_track.id);
       setCurrentTrack(state.track_window.current_track.name);
+      setCurrentTrackCover(state.track_window.current_track.album.images[0].url);
+      setCurrentTrackPosition(state.position);
+      setCurrentTrackDuration(state.duration);
+      // seek(accessToken, deviceId, currentTrackPosition);
     };
     if (player) {
       player.addListener("player_state_changed", playerStateChanged);
@@ -86,6 +115,7 @@ const Player: React.FC<Props> = ({ accessToken, isLoggedIn }) => {
       {isLoggedIn ? (
         <>
           <div className={"ml-3 mr-3 col-3 " + styles.informations}>
+            <img className={styles.cover} src={currentTrackCover} alt="cover track" />
             <Navbar.Text>{currentTrack}</Navbar.Text>
           </div>
           <div className={" col-3" + styles.controls}>
@@ -120,6 +150,10 @@ const Player: React.FC<Props> = ({ accessToken, isLoggedIn }) => {
             <Navbar.Text>
               <i className="fas fa-undo"></i>
             </Navbar.Text>
+
+            <Navbar.Text className={styles.duration}>{convertMilliToMinSec(currentTrackPosition)} </Navbar.Text>
+
+            <Navbar.Text className={styles.duration}>{convertMilliToMinSec(currentTrackDuration)}</Navbar.Text>
           </div>
         </>
       ) : null}

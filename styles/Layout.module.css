@@ -13,6 +13,10 @@
   background-attachment: fixed;
   background-position: center;
 }
+.login main {
+  min-height: 100%;
+  position: absolute;
+}
 .layout h3 {
   color: rgb(181 177 177);
   margin-top: 2em;

@@ -17,7 +17,7 @@ export const Layout: React.FC<Props> = ({ children, isLoggedIn, spotifyLoginUrl 
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <script src="https://kit.fontawesome.com/95a069202e.js" crossOrigin="anonymous"></script>
       </Head>
-      <div className={"flex-row justify-content-start " + styles.layout}>
+      <div className={"flex-row justify-content-start " + isLoggedIn ? styles.layout : styles.login}>
         <Sidebar isLoggedIn={isLoggedIn} spotifyLoginUrl={spotifyLoginUrl} />
 
         <main className={" " + styles.main}>{children}</main>
