@@ -58,7 +58,7 @@ const Player: NextPage<Props> = ({ accessToken }) => {
   const user = data;
   return (
     <Layout isLoggedIn={true}>
-      <div className="player">
+      {/* <div className="player">
         <h1>Player</h1>
         <p>Welcome {user && user.display_name}</p>
         <p>{currentTrack}</p>

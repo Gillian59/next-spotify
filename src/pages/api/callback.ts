@@ -20,9 +20,9 @@ export default async (request: NextApiRequest, response: NextApiResponse): Promi
     },
     body: params,
   });
-  const { access_token } = await res.json();
+  const { access_token, refresh_token } = await res.json();
 
-  response.setHeader("Set-Cookie", `spot-next=${access_token}; Max-Age=3600000; Path=/`);
+  response.setHeader("Set-Cookie", `spot-next=${access_token}; Max-Age=3600; Path=/`);
 
   response.redirect("/player");
 };

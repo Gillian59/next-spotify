@@ -3,7 +3,6 @@
 }
 
 .layout main {
-  /* min-width: 100%; */
   min-height: 100%;
   margin-left: 250px;
   padding: 50px 50px 100px 50px;
@@ -11,6 +10,18 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
+  background-position: center;
+}
+.login main {
+  filter: sepia(1) blur(1px);
+  width: 100%;
+  min-height: 100%;
+  left: 250px;
+  padding: 50px 50px 100px 50px;
+  position: absolute;
+  background-image: url("../public/login_background.png");
+  background-repeat: no-repeat;
+  background-size: cover;
   background-position: center;
 }
 .layout h3 {
