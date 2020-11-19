@@ -29,6 +29,10 @@
   margin-right: 2em;
   cursor: pointer;
 }
+
+.player i:hover {
+  color: rgb(126 127 128);
+}
 .informations {
   min-width: 500px;
   text-align: left;
@@ -40,6 +44,9 @@
 }
 .informations span {
   color: rgb(204 199 199) !important;
+}
+.activated_control {
+  color: red !important;
 }
 
 .duration {

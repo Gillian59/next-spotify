@@ -20,21 +20,18 @@ const play = (accessToken: string, deviceId: string) => {
     },
     body: JSON.stringify({
       context_uri: "spotify:playlist:37i9dQZF1DX8pxtTvJ2V4V",
-      // uris: ["spotify:track:4Ynr1SPCeUI0W0YPeSFSIK"],
     }),
   });
 };
 
-const resume = (accessToken: string, deviceId: string, track_id: string, position: number) => {
+// uris: ["spotify:track:" + track_id],
+//       position_ms: position,
+const resume = (accessToken: string, deviceId: string) => {
   return fetch(`https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`, {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
-    body: JSON.stringify({
-      uris: ["spotify:track:" + track_id],
-      position_ms: position,
-    }),
   });
 };
 
@@ -75,6 +72,24 @@ const seek = (accessToken: string, deviceId: string, position_ms: number) => {
   });
 };
 
+const shuffle = (accessToken: string, deviceId: string, state: boolean) => {
+  return fetch(`https://api.spotify.com/v1/me/player/shuffle?state=${state}&device_id=${deviceId}`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+};
+
+const repeat = (accessToken: string, deviceId: string) => {
+  return fetch(`https://api.spotify.com/v1/me/player/repeat?device_id=${deviceId}`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+};
+
 const convertMilliToMinSec = (ms: number) => {
   const min = Math.floor(ms / 60000);
   const sec = parseInt(((ms % 60000) / 1000).toFixed(0));
@@ -83,10 +98,13 @@ const convertMilliToMinSec = (ms: number) => {
 
 const Player: React.FC<Props> = ({ accessToken, isLoggedIn }) => {
   const [paused, setPaused] = React.useState(false);
+  const [shuffled, setShuffled] = React.useState(false);
+  const [looped, setLooped] = React.useState(false);
   const [currentTrackID, setCurrentTrackID] = React.useState("");
   const [currentTrack, setCurrentTrack] = React.useState("");
   const [currentTrackCover, setCurrentTrackCover] = React.useState("");
   const [currentTrackPosition, setCurrentTrackPosition] = React.useState(0);
+  const [currentTrackLaps, setCurrentTrackLaps] = React.useState(0);
   const [currentTrackDuration, setCurrentTrackDuration] = React.useState(0);
   const [deviceId, player] = useSpotifyPlayer(accessToken);
 
@@ -96,9 +114,7 @@ const Player: React.FC<Props> = ({ accessToken, isLoggedIn }) => {
       setCurrentTrackID(state.track_window.current_track.id);
       setCurrentTrack(state.track_window.current_track.name);
       setCurrentTrackCover(state.track_window.current_track.album.images[0].url);
-      setCurrentTrackPosition(state.position);
       setCurrentTrackDuration(state.duration);
-      // seek(accessToken, deviceId, currentTrackPosition);
     };
     if (player) {
       player.addListener("player_state_changed", playerStateChanged);
@@ -119,8 +135,13 @@ const Player: React.FC<Props> = ({ accessToken, isLoggedIn }) => {
             <Navbar.Text>{currentTrack}</Navbar.Text>
           </div>
           <div className={" col-3" + styles.controls}>
-            <Navbar.Text>
-              <i className="fas fa-random"></i>
+            <Navbar.Text
+              onClick={() => {
+                shuffle(accessToken, deviceId, !shuffled);
+                setShuffled(!shuffled);
+              }}
+            >
+              <i className={"fas fa-random " + (shuffled ? styles.activated_control : "")}></i>
             </Navbar.Text>
 
             <Navbar.Text
@@ -133,10 +154,14 @@ const Player: React.FC<Props> = ({ accessToken, isLoggedIn }) => {
 
             <Navbar.Text
               onClick={() => {
-                paused ? play(accessToken, deviceId) : pause(accessToken, deviceId);
+                paused ? resume(accessToken, deviceId) : pause(accessToken, deviceId);
               }}
             >
-              {paused ? <i className="fas fa-play"></i> : <i className="fas fa-pause-circle"></i>}
+              {paused ? (
+                <i className="fas fa-play"></i>
+              ) : (
+                <i className={"fas fa-pause-circle " + styles.activated_control}></i>
+              )}
             </Navbar.Text>
 
             <Navbar.Text
@@ -147,11 +172,15 @@ const Player: React.FC<Props> = ({ accessToken, isLoggedIn }) => {
               <i className="fas fa-fast-forward"></i>
             </Navbar.Text>
 
-            <Navbar.Text>
+            <Navbar.Text
+              onClick={() => {
+                repeat(accessToken, deviceId);
+              }}
+            >
               <i className="fas fa-undo"></i>
             </Navbar.Text>
 
-            <Navbar.Text className={styles.duration}>{convertMilliToMinSec(currentTrackPosition)} </Navbar.Text>
+            <Navbar.Text className={styles.duration}>{convertMilliToMinSec(currentTrackLaps)} </Navbar.Text>
 
             <Navbar.Text className={styles.duration}>{convertMilliToMinSec(currentTrackDuration)}</Navbar.Text>
           </div>
