@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@700&display=swap");
 .layout {
   overflow: hidden;
 }
@@ -13,18 +14,23 @@
   background-position: center;
 }
 .login main {
-  filter: sepia(1) blur(1px);
+  filter: blur(1px) brightness(0.2);
   width: 100%;
   min-height: 100%;
   left: 250px;
   padding: 50px 50px 100px 50px;
   position: absolute;
-  background-image: url("../public/login_background.png");
+  background-image: url("../public/login_background.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
 }
+.layout h1 {
+  color: rgb(84 82 82);
+  text-shadow: 3px 2px 7px #040404;
+}
 .layout h3 {
+  font-family: "Balsamiq Sans", cursive;
   color: rgb(181 177 177);
   margin-top: 2em;
 }

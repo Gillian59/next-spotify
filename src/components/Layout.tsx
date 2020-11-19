@@ -1,17 +1,18 @@
-import React, { Props } from "react";
+import React from "react";
 import Head from "next/head";
-
-import Link from "next/link";
 import Sidebar from "./sidebar";
-import Player from "./player";
+import Player from "./footer_player";
 import useSWR from "swr";
 import styles from "../../styles/Layout.module.css";
-import { redirect } from "next/dist/next-server/server/api-utils";
-
-export const Layout: React.FC<Props> = ({ children, isLoggedIn, spotifyLoginUrl }) => {
-  const { data, error } = useSWR("/api/get-cookies");
+type Props = {
+  setPage: React.Dispatch<React.SetStateAction<string>>;
+  isLoggedIn: boolean;
+  spotifyLoginUrl: string;
+};
+export const Layout: React.FC<Props> = ({ children, isLoggedIn, spotifyLoginUrl, setPage }) => {
+  const { data } = useSWR("/api/get-cookies");
   const accessToken = data;
-    
+
   return (
     <>
       <Head>
@@ -21,7 +22,7 @@ export const Layout: React.FC<Props> = ({ children, isLoggedIn, spotifyLoginUrl 
         <script src="https://kit.fontawesome.com/95a069202e.js" crossOrigin="anonymous"></script>
       </Head>
       <div className={"flex-row justify-content-start " + (isLoggedIn ? styles.layout : styles.login)}>
-        <Sidebar isLoggedIn={isLoggedIn} spotifyLoginUrl={spotifyLoginUrl} />
+        <Sidebar isLoggedIn={isLoggedIn} spotifyLoginUrl={spotifyLoginUrl} setPage={setPage} />
 
         <main className={" " + styles.main}>{children}</main>
         {isLoggedIn ? <Player accessToken={accessToken} isLoggedIn={isLoggedIn} /> : null}

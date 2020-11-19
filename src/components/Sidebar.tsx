@@ -6,7 +6,7 @@ import styles from "../../styles/Sidebar.module.css";
 type Props = {
   isLoggedIn: boolean;
   spotifyLoginUrl?: string;
-  setPage: any;
+  setPage: React.Dispatch<React.SetStateAction<string>>;
 };
 const Sidebar: React.FC<Props> = ({ isLoggedIn, spotifyLoginUrl, setPage }) => {
   const { data } = useSWR("/api/get-user-info");
@@ -27,30 +27,39 @@ const Sidebar: React.FC<Props> = ({ isLoggedIn, spotifyLoginUrl, setPage }) => {
       <div className={styles.link}>
         {isLoggedIn ? (
           <>
-            <Nav.Link href="#">
+            <Nav.Link
+              onClick={() => {
+                setPage("home");
+              }}
+            >
               <i className="fas fa-campground"></i> Home
             </Nav.Link>
-            <Nav.Link eventKey="link-1">
-              <i
-                className="fas fa-search"
-                onClick={() => {
-                  setPage("search");
-                }}
-              ></i>{" "}
-              Rechercher
+
+            <Nav.Link
+              onClick={() => {
+                setPage("search");
+              }}
+            >
+              <i className="fas fa-search"></i> Rechercher
             </Nav.Link>
-            <Nav.Link eventKey="link-2">
+
+            <Nav.Link>
               <i className="fab fa-spotify"></i> Bibliothèque
             </Nav.Link>
+
             <hr className="dotted"></hr>
+
             <Navbar.Text className={styles.section}>PLAYLIST</Navbar.Text>
-            <Nav.Link eventKey="link-2">
+            <Nav.Link>
               <i className="fas fa-plus-square"></i> Créer Playlist
             </Nav.Link>
-            <Nav.Link eventKey="link-2">
+
+            <Nav.Link>
               <i className="fab fa-gratipay"></i> Mes Playlists
             </Nav.Link>
+
             <hr className="dotted"></hr>
+
             <Link href="/api/logout" passHref>
               <Nav.Link eventKey="link-3">
                 <i className="fas fa-sign-out-alt"></i> logout
