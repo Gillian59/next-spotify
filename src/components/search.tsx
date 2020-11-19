@@ -29,7 +29,7 @@ export const FormSearch: React.FC<any> = ({ accessToken }) => {
         {texteRecherche === "" ? (
           <CategoryList accessToken={accessToken} />
         ) : (
-          <ShowResultat accessToken={accessToken}></ShowResultat>
+          <ShowResultat accessToken={accessToken} texteToFind={texteRecherche}></ShowResultat>
         )}
       </div>
     </form>
