@@ -73,16 +73,11 @@ const Player: NextPage<Props> = ({ accessToken }) => {
       <div>
         {/* {page === "home" && <Home />} */}
       {page === "search" && <FormSearch accessToken={accessToken} />}
-      {/* </div> */}
-      <h3>Going to Drum And Bass</h3>
-      <PlaylistsCollection playlistStyle={"dnb"} />
-      <h3>Forge some Metal</h3>
-      <PlaylistsCollection playlistStyle={"metal"} />
-      <h3>Destroy in Electro</h3>
-      <PlaylistsCollection playlistStyle={"electro"} />
-      <h3>Chill out with Reggae</h3>
-      <PlaylistsCollection playlistStyle={"reggae"} />
-      <h3>Up to be Happy</h3>
+      {/* </div> */}​<h3>Going to Drum And Bass</h3>
+      <PlaylistsCollection playlistStyle={"dnb"} />​<h3>Forge some Metal</h3>
+      <PlaylistsCollection playlistStyle={"metal"} />​<h3>Destroy in Electro</h3>
+      <PlaylistsCollection playlistStyle={"electro"} />​<h3>Chill out with Reggae</h3>
+      <PlaylistsCollection playlistStyle={"reggae"} />​<h3>Up to be Happy</h3>
       <PlaylistsCollection playlistStyle={"happy"} />
     </Layout>
   );
