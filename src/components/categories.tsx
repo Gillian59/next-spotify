@@ -1,6 +1,9 @@
 import React from "react";
 import Link from "next/link";
 import { CategoriesItem } from "../types/spotify";
+import { Card } from "react-bootstrap";
+import styles from "../../styles/Categories.module.css";
+
 const CategoryList: React.FC<{ accessToken: string }> = ({ accessToken }) => {
   console.log("ici");
   //  console.log({ categories_items });
@@ -36,18 +39,22 @@ const CategoryList: React.FC<{ accessToken: string }> = ({ accessToken }) => {
     getCategories();
   }, [loaded]);
   return (
-    <div>
+    <div className="row mt-3 collection">
       {/* {setLoaded(false)} */}
       {categories.map((elt, id) => {
         return (
-          <div key={elt.id + "_" + id}>
-            <Link href={`/categories/${elt.id}`}>
-              <div>
-                <p> {elt.name}</p>
-                {elt.icons.length > 0 ? <img src={elt.icons[0].url} alt={elt.name}></img> : null}
-              </div>
-            </Link>
-          </div>
+          <Link key={elt.id + "_" + id} href={`/categories/${elt.id}`}>
+            <Card className={styles.card + " col-12 col-md-3 col-lg-2 mx-2 mt-3"} title={elt.name}>
+              {elt.icons.length > 0 ? (
+                <Card.Img className={styles.card_img + " img-fluid"} src={elt.icons[0].url} alt={elt.name} />
+              ) : null}
+              <Card.Body>
+                <Card.Title className="title text-truncate" style={{ fontSize: "medium" }}>
+                  {elt.name}
+                </Card.Title>
+              </Card.Body>
+            </Card>
+          </Link>
         );
       })}
     </div>
