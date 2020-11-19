@@ -5,6 +5,7 @@ import Sidebar from "./sidebar";
 import Player from "./player";
 import useSWR from "swr";
 import styles from "../../styles/Layout.module.css";
+import { redirect } from "next/dist/next-server/server/api-utils";
 
 export const Layout: React.FC<Props> = ({ children, isLoggedIn, spotifyLoginUrl }) => {
   const { data, error } = useSWR("/api/get-cookies");
@@ -18,11 +19,11 @@ export const Layout: React.FC<Props> = ({ children, isLoggedIn, spotifyLoginUrl 
         <link rel="bkwiet corp icon" href="favicon.png" type="image/x-icon" />
         <script src="https://kit.fontawesome.com/95a069202e.js" crossOrigin="anonymous"></script>
       </Head>
-      <div className={"flex-row justify-content-start " + isLoggedIn ? styles.layout : styles.login}>
+      <div className={"flex-row justify-content-start " + (isLoggedIn ? styles.layout : styles.login)}>
         <Sidebar isLoggedIn={isLoggedIn} spotifyLoginUrl={spotifyLoginUrl} />
 
         <main className={" " + styles.main}>{children}</main>
-        <Player accessToken={accessToken} isLoggedIn={isLoggedIn} />
+        {isLoggedIn ? <Player accessToken={accessToken} isLoggedIn={isLoggedIn} /> : null}
       </div>
     </>
   );

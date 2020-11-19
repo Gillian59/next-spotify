@@ -116,6 +116,7 @@ const Player: React.FC<Props> = ({ accessToken, isLoggedIn }) => {
       setCurrentTrackCover(state.track_window.current_track.album.images[0].url);
       setCurrentTrackDuration(state.duration);
     };
+
     if (player) {
       player.addListener("player_state_changed", playerStateChanged);
     }
