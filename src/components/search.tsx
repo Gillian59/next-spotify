@@ -25,14 +25,13 @@ export const FormSearch: React.FC<any> = ({ accessToken }) => {
           onChange={(event) => validateTexteRecherche(event.target.value)}
         />
       </div>
-      <button type="submit" className="btn btn-primary">
-        Submit
-      </button>
-      {texteRecherche === null ? (
-        <CategoryList accessToken={accessToken} />
-      ) : (
-        <ShowResultat accessToken={accessToken}></ShowResultat>
-      )}
+      <div>
+        {texteRecherche === "" ? (
+          <CategoryList accessToken={accessToken} />
+        ) : (
+          <ShowResultat accessToken={accessToken}></ShowResultat>
+        )}
+      </div>
     </form>
   );
 };
