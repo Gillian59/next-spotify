@@ -4,7 +4,8 @@
 }
 
 .layout main {
-  min-height: 100%;
+  color: rgb(173 171 171);
+  min-height: 100vh;
   margin-left: 250px;
   padding: 50px 50px 100px 50px;
   background-image: url("../public/main_background.jpg");
@@ -16,10 +17,9 @@
 .login main {
   filter: blur(1px) brightness(0.2);
   width: 100%;
-  min-height: 100%;
+  min-height: 100vh;
   left: 250px;
   padding: 50px 50px 100px 50px;
-  position: absolute;
   background-image: url("../public/login_background.jpg");
   background-repeat: no-repeat;
   background-size: cover;

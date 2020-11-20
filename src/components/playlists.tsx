@@ -9,9 +9,11 @@ import { playPlaylist } from "./footer_player";
 type PlaylistStyle = {
   playlistStyle: string;
   accessToken: string;
+  setPage: React.Dispatch<React.SetStateAction<string>>;
+  setContext_id: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const PlaylistsCollection: React.FC<PlaylistStyle> = ({ playlistStyle, accessToken }) => {
+const PlaylistsCollection: React.FC<PlaylistStyle> = ({ playlistStyle, accessToken, setPage, setContext_id }) => {
   const { data, error } = useSWR("/api/get-playlists?style=" + playlistStyle);
 
   if (error) return <div>failed to load playlist</div>;
@@ -22,10 +24,13 @@ const PlaylistsCollection: React.FC<PlaylistStyle> = ({ playlistStyle, accessTok
     <div className="row mt-3 collection">
       {playlists.map((playlist) => {
         return (
-          // <Link key={playlist.id} href={`/playlist/${playlist.id}`} passHref>
           <Link key={playlist.id} href="#">
             <Card
-              onClick={() => playPlaylist(accessToken, playlist.id)}
+              onClick={() => {
+                playPlaylist(accessToken, playlist.id);
+                setContext_id(playlist.id);
+                setPage("playlist");
+              }}
               className={styles.card + " col-12 col-md-3 col-lg-2 mx-2 mt-3"}
               title={playlist.name}
             >
