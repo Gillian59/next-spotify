@@ -31,6 +31,7 @@ const PlaylistsCollection: React.FC<PlaylistStyle> = ({ playlistStyle }) => {
                   {playlist.description}
                 </Card.Text>
               </Card.Body>
+              <img className={styles.play_icon} src="play_button.png" alt="play_button" />
             </Card>
           </Link>
         );

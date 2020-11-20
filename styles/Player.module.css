@@ -34,7 +34,7 @@
   color: rgb(126 127 128);
 }
 .informations {
-  min-width: 500px;
+  min-width: 400px;
   text-align: left;
 }
 .cover {
@@ -52,4 +52,19 @@
 .duration {
   margin-right: 2em;
   color: rgb(138 4 4) !important;
+}
+
+.controls {
+  width: 100%;
+}
+
+.timebar {
+  width: 300px;
+  height: 6px;
+  margin-right: 2em;
+  display: inline-flex;
+}
+
+.timebar div {
+  background-color: #616161;
 }
