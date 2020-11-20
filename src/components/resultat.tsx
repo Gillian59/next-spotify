@@ -34,12 +34,12 @@ const ShowResultat: React.FC<any> = ({ accessToken, texteToFind }) => {
     return (
       <div>
         <div>
-          <p>Titres</p>
+          <p className={styles.resultArtiste}>Titres</p>
           <div className="row mt-3 collection ">
             {data.tracks.items.map((elt: any, index) => {
               if (index < 5) {
                 return (
-                  <Card className={styles.cardT + " col-12 col-md-1 col-lg-5 mx-1 mt-3"} key={elt.name}>
+                  <Card className={styles.cardArt + " col-12 col-md-1 col-lg-5 mx-1 mt-3"} key={elt.name}>
                     {elt.album.images.length > 0 ? (
                       <Card.Img
                         className={styles.card_img + " img-fluid" + " col-sm-3" + " position: absolute"}
@@ -47,7 +47,7 @@ const ShowResultat: React.FC<any> = ({ accessToken, texteToFind }) => {
                         alt={elt.name}
                       />
                     ) : null}
-                    <Card.Title className="titleT text-truncate" style={{ fontSize: "small" }}>
+                    <Card.Title className="title text-truncate my-auto" style={{ fontSize: "small" }}>
                       {elt.name}
                     </Card.Title>
                   </Card>
@@ -57,7 +57,7 @@ const ShowResultat: React.FC<any> = ({ accessToken, texteToFind }) => {
               }
             })}
           </div>
-          <p> Artistes</p>
+          <p className={styles.resultArtiste}>Artistes</p>
           <div className="row mt-3 collection">
             {data.artists.items.map((elt: any, index) => {
               if (index < 5) {
@@ -81,7 +81,7 @@ const ShowResultat: React.FC<any> = ({ accessToken, texteToFind }) => {
             })}
           </div>
         </div>
-        <p>Albums</p>
+        <p className={styles.resultArtiste}>Albums</p>
         <div className="row mt-3 collection">
           {data.albums.items.map((elt: any, index) => {
             if (index < 5) {
