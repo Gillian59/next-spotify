@@ -44,7 +44,7 @@ export const playTrack = (accessToken: string, track_id: string): Promise<Respon
       Authorization: `Bearer ${accessToken}`,
     },
     body: JSON.stringify({
-      uri: `spotify:track:${track_id}`,
+      uris: [`spotify:track:${track_id}`],
     }),
   });
 };
@@ -113,7 +113,7 @@ const repeat = (accessToken: string, deviceId: string) => {
   });
 };
 
-const convertMilliToMinSec = (ms: number) => {
+export const convertMilliToMinSec = (ms: number) => {
   const min = Math.floor(ms / 60000);
   const sec = parseInt(((ms % 60000) / 1000).toFixed(0));
   return `${min}:${sec < 10 ? "0" : ""}${sec}`;
@@ -125,6 +125,7 @@ const Player: React.FC<Props> = ({ accessToken, isLoggedIn }) => {
   const [looped, setLooped] = React.useState(false);
   const [currentTrackID, setCurrentTrackID] = React.useState("");
   const [currentTrack, setCurrentTrack] = React.useState("");
+  const [currentTrackArtist, setCurrentTrackArtist] = React.useState("");
   const [currentTrackCover, setCurrentTrackCover] = React.useState("");
   const [currentTrackPosition, setCurrentTrackPosition] = React.useState(0);
   const [currentTrackDuration, setCurrentTrackDuration] = React.useState(0);
@@ -136,6 +137,7 @@ const Player: React.FC<Props> = ({ accessToken, isLoggedIn }) => {
       setPaused(state.paused);
       setCurrentTrackID(state.track_window.current_track.id);
       setCurrentTrack(state.track_window.current_track.name);
+      setCurrentTrackArtist(state.track_window.current_track.artists[0].name);
       setCurrentTrackCover(state.track_window.current_track.album.images[0].url);
       setCurrentTrackDuration(state.duration);
       setCurrentTrackPosition(state.position);
@@ -157,7 +159,9 @@ const Player: React.FC<Props> = ({ accessToken, isLoggedIn }) => {
         <>
           <div className={"ml-3 mr-3 col-3 " + styles.informations}>
             <img className={styles.cover} src={currentTrackCover} alt="cover track" />
-            <Navbar.Text>{currentTrack}</Navbar.Text>
+            <Navbar.Text>
+              Artiste : {currentTrackArtist} <br /> Titre : {currentTrack}
+            </Navbar.Text>
           </div>
           <div className={"row col-6 " + styles.controls}>
             <div className={"col-12"}>

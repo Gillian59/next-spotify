@@ -137,11 +137,50 @@ export type SpotifyPlaylist = {
   snapshot_id: string;
   tracks: {
     href: string;
-    total: 50;
-  };
-  type: string;
-  uri: string;
+    items: {
+      added_at: string;
+      added_by: {
+        external_urls: {
+          spotify: string;
+        };
+        href: string;
+        id: string;
+        type: string;
+        uri: string;
+      };
+      is_local: boolean;
+      primary_color: null;
+      track: SpotifyTrack;
+      video_thumbnail: {
+        url: null;
+      };
+    }[];
+    limit: number;
+    next: null;
+    offset: number;
+    previous: null;
+    total: total;
 };
+
+// tracks: {
+//     added_at: string;
+//     added_by: {
+//       external_urls: {
+//         spotify: string;
+//       };
+//       href: string;
+//       id: string;
+//       type: string;
+//       uri: string;
+//     };
+//     is_local: boolean;
+//     primary_color: null;
+//     track: SpotifyTrack[];
+//     video_thumbnail: {
+//       url: null;
+//     };
+
+// SpotifyTrack[];
 
 export type SpotifySearch = {
   href: string;

@@ -1,14 +1,12 @@
 import { NextPage, GetServerSidePropsContext } from "next";
-import useSpotifyPlayer from "../hooks/useSpotifyPlayer";
 import Cookies from "cookies";
 import useSWR from "swr";
-import { Layout } from "../components/Layout";
-import PlaylistsCollection from "../components/playlists";
-//import CategoryList from "../components/categories";
 import React, { useState } from "react";
 import { SpotifyState, SpotifyUser } from "../types/spotify";
+import { Layout } from "../components/Layout";
 import FormSearch from "../components/search";
 import Home from "../components/home";
+import Show_Playlist from "../components/show_playlist";
 
 interface Props {
   user: SpotifyUser;
@@ -37,15 +35,16 @@ const pause = (accessToken: string, deviceId: string) => {
 const Player: NextPage<Props> = ({ accessToken }) => {
   const { data, error } = useSWR("/api/get-user-info");
   const [page, setPage] = useState("home");
+  const [context_id, setContext_id] = useState("dnb971X:FF:AA:11:EB");
 
   if (error) return <div>failed to load</div>;
   if (!data) return <div>loading...</div>;
   const user = data;
   return (
     <Layout isLoggedIn={true} setPage={setPage}>
-      {page === "home" && <Home accessToken={accessToken} />}
+      {page === "home" && <Home accessToken={accessToken} setPage={setPage} setContext_id={setContext_id} />}
       {page === "search" && <FormSearch accessToken={accessToken} />}
-      {page === "playlist" && ""}​
+      {page === "playlist" && <Show_Playlist accessToken={accessToken} context_id={context_id} />}​
     </Layout>
   );
 };
