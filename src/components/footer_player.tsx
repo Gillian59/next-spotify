@@ -13,14 +13,38 @@ interface Props {
   accessToken: string;
 }
 
-const play = (accessToken: string, deviceId: string) => {
-  return fetch(`https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`, {
+export const playPlaylist = (accessToken: string, playlist_id: string): Promise<Response> => {
+  return fetch(`https://api.spotify.com/v1/me/player/play`, {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
     body: JSON.stringify({
-      context_uri: "spotify:playlist:37i9dQZF1DX8pxtTvJ2V4V",
+      context_uri: `spotify:playlist:${playlist_id}`,
+    }),
+  });
+};
+
+export const playAlbum = (accessToken: string, album_id: string): Promise<Response> => {
+  return fetch(`https://api.spotify.com/v1/me/player/play`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify({
+      context_uri: `spotify:album:${album_id}`,
+    }),
+  });
+};
+
+export const playTrack = (accessToken: string, track_id: string): Promise<Response> => {
+  return fetch(`https://api.spotify.com/v1/me/player/play`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify({
+      uri: `spotify:track:${track_id}`,
     }),
   });
 };
