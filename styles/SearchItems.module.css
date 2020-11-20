@@ -40,7 +40,7 @@
   color: white;
   font-size: small;
 }
-.cardT {
+.cardarT {
   color: white;
   cursor: pointer;
   background-color: rgb(10 10 10);
@@ -48,6 +48,8 @@
   padding-top: 0px;
   overflow: hidden;
   font-size: small;
+  display: flex;
+  flex-direction: row;
 }
 .card imgT {
   /* width: 100px; */
@@ -60,4 +62,66 @@
   color: white;
   font-size: small;
   padding-left: 90px;
+}
+.resultTitle {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 100%;
+  display: inline-block;
+  color: white !important;
+  /* -webkit-tap-highlight-color: rgb(49 48 48 / 85%) */
+}
+.resultArtiste {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 100%;
+  display: inline-block;
+  color: white !important;
+  /* -webkit-tap-highlight-color: rgb(49 48 48 / 85%) */
+}
+
+.cardArt {
+  color: white;
+  cursor: pointer;
+  background-color: rgb(10 10 10);
+  border: 1px solid rgb(125 113 113);
+  padding-top: 0px;
+  overflow: hidden;
+  font-size: small;
+  display: flex;
+  flex-direction: row;
+  padding-left: 1px;
+  margin-left: 0px;
+}
+
+.card_img{
+  padding-left: 0px;
+  max-width: 80px
+}
+
+.cardT {
+  color: white;
+  cursor: pointer;
+  background-color: rgb(10 10 10);
+  border: 1px solid rgb(125 113 113);
+  padding-top: 0px;
+  overflow: hidden;
+  font-size: small;
+}
+
+.titleArt{
+text-align: justify;
+font-size : 5px;
+
+}
+.cardarT {
+  color: white;
+  cursor: pointer;
+  background-color: rgb(10 10 10);
+  border: 1px solid rgb(125 113 113);
+  padding-top: 0px;
+  overflow: hidden;
+  font-size: small;
 }

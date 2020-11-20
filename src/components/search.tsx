@@ -15,7 +15,6 @@ export const FormSearch: React.FC<any> = ({ accessToken }) => {
       }}
     >
       <div className="form-group">
-        <label htmlFor="Recherche">texteRecherche</label>
         <input
           type="text"
           className="form-control"
