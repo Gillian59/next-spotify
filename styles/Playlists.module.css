@@ -10,6 +10,15 @@
 .card:hover {
   background-color: rgb(49 48 48 / 85%);
 }
+.play_icon {
+  width: 69px;
+  height: 69px;
+  position: absolute;
+  display: none;
+}
+.card:hover .play_icon {
+  display: initial;
+}
 
 .card img {
   height: 120px;
