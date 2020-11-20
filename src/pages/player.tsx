@@ -43,7 +43,7 @@ const Player: NextPage<Props> = ({ accessToken }) => {
   const user = data;
   return (
     <Layout isLoggedIn={true} setPage={setPage}>
-      {page === "home" && <Home />}
+      {page === "home" && <Home accessToken={accessToken} />}
       {page === "search" && <FormSearch accessToken={accessToken} />}
       {page === "playlist" && ""}​
     </Layout>
